@@ -11,12 +11,12 @@ export interface CheckForUpdateConfig {
 }
 
 export async function checkForUpdate(config: CheckForUpdateConfig) {
-  if (__DEV__) {
-    console.warn(
-      "[HotUpdater] __DEV__ is true, HotUpdater is only supported in production",
-    );
-    return null;
-  }
+  // if (__DEV__) {
+  //   console.warn(
+  //     "[HotUpdater] __DEV__ is true, HotUpdater is only supported in production",
+  //   );
+  //   return null;
+  // }
 
   if (!["ios", "android"].includes(Platform.OS)) {
     throw new HotUpdaterError(

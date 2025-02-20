@@ -19,7 +19,7 @@
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
     "@hot-updater/metro": "0.10.1",
-    "@hot-updater/supabase": "0.10.1",
+    "@hot-updater/aws": "file://../../plugins/aws",
     "@react-native-community/cli-platform-android": "10.2.0",
     "@react-native-community/cli-platform-ios": "10.2.5",
     "@react-native-community/eslint-config": "^3.2.0",

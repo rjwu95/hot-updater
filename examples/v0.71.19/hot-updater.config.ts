@@ -1,19 +1,24 @@
-import { metro } from "@hot-updater/metro";
-import { supabaseDatabase, supabaseStorage } from "@hot-updater/supabase";
-import { defineConfig } from "hot-updater";
-import "dotenv/config";
+import {metro} from '@hot-updater/metro';
+import {s3Storage, s3Database} from '@hot-updater/aws';
+import {defineConfig} from 'hot-updater';
+import 'dotenv/config';
+
+const options = {
+  bucketName: process.env.HOT_UPDATER_AWS_S3_BUCKET_NAME!,
+  region: process.env.HOT_UPDATER_AWS_REGION!,
+  credentials: {
+    accessKeyId: process.env.HOT_UPDATER_AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.HOT_UPDATER_AWS_SECRET_ACCESS_KEY!,
+  },
+};
 
 export default defineConfig({
   build: metro({
     enableHermes: true,
   }),
-  storage: supabaseStorage({
-    supabaseUrl: process.env.HOT_UPDATER_SUPABASE_URL!,
-    supabaseAnonKey: process.env.HOT_UPDATER_SUPABASE_ANON_KEY!,
-    bucketName: process.env.HOT_UPDATER_SUPABASE_BUCKET_NAME!,
+  storage: s3Storage(options, {
+    transformFileUrl: key =>
+      `https://${process.env.HOT_UPDATER_CLOUDFRONT_URL}/${key}`,
   }),
-  database: supabaseDatabase({
-    supabaseUrl: process.env.HOT_UPDATER_SUPABASE_URL!,
-    supabaseAnonKey: process.env.HOT_UPDATER_SUPABASE_ANON_KEY!,
-  }),
+  database: s3Database(options),
 });

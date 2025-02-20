@@ -1,3 +1,3 @@
-declare module "@env" {
-  export const HOT_UPDATER_SUPABASE_URL: string;
+declare module '@env' {
+  export const HOT_UPDATER_CLOUDFRONT_URL: string;
 }
